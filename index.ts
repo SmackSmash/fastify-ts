@@ -1,13 +1,11 @@
 import Fastify from 'fastify';
-import test from './services/db';
+import testRoute from './routes/test';
 
 const fastify = Fastify({
   logger: true
 });
 
-fastify.get('/', async function handler(request, reply) {
-  return { hello: test };
-});
+fastify.register(testRoute);
 
 (async () => {
   try {
