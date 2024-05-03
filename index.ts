@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import Fastify from 'fastify';
 import dbConnector from './services/db';
-import testRoute from './routes/test';
+import routes from './routes';
 
 const fastify = Fastify({
   logger: true
@@ -9,7 +9,7 @@ const fastify = Fastify({
 
 fastify.register(dbConnector);
 
-fastify.register(testRoute);
+fastify.register(routes);
 
 try {
   fastify.listen({ port: 3000 });
