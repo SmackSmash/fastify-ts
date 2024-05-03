@@ -1,5 +1,5 @@
 import Fastify from 'fastify';
-import fastifyEnv from '@fastify/env';
+import 'dotenv/config';
 import fastifyMongo from '@fastify/mongodb';
 import testRoute from './routes/test';
 
@@ -17,24 +17,16 @@ const envSchema = {
   }
 };
 
-await fastify.register(fastifyEnv, {
-  confKey: 'config',
-  schema: envSchema,
-  dotenv: true
-});
-
-await fastify.register(fastifyMongo, {
+fastify.register(fastifyMongo, {
   forceClose: true,
-  url: fastify.config.MONGO_URI
+  url: process.env.MONGO_URI
 });
 
-await fastify.register(testRoute);
+fastify.register(testRoute);
 
 try {
-  await fastify.listen({ port: 3000 });
+  fastify.listen({ port: 3000 });
 } catch (error: unknown) {
   fastify.log.error(error);
   process.exit(1);
 }
-
-export {};
