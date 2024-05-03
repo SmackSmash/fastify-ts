@@ -1,5 +1,5 @@
 import Fastify from 'fastify';
-import fastifyEnv, { FastifyEnvOptions } from '@fastify/env';
+import fastifyEnv from '@fastify/env';
 import fastifyMongo from '@fastify/mongodb';
 import testRoute from './routes/test';
 
